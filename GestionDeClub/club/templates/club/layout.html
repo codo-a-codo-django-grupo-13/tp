@@ -13,22 +13,23 @@
         <link rel="shortcut icon" type="image/png" href="{% static 'club/img/favicon.ico' %}">
 
 
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
         {% block extra_head %}{% endblock %}
     </head>
 
-    <body>
-        <header>
-            {% include 'club/header.html' %}
+    <body class="d-flex flex-column">
+        <header class="sticky-top">
+            {% include 'club/partials/header.html' %}
         </header>
 
-        <main>
+        <main class="d-flex flex-column">
             {% block main_content %}{% endblock %}
         </main>
 
-        <footer>
-            {% include 'club/footer.html' %}
+        <footer class="bg-dark mt-auto">
+            {% include 'club/partials/footer.html' %}
         </footer>
     </body>
 </html>
