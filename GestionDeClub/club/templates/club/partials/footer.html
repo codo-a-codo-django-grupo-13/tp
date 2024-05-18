@@ -1,3 +1,61 @@
 <div class="container">
-    <span class="text-bg-dark">Footer</span>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Contacto</h5>
+            <ul class="list-unstyled">
+                <li><i class="fas fa-envelope"></i> <span class="text-white ">Email: <span class="text-white fw text-decoration-none">Grupo_13@club.com</span></li>
+                <li><i class="fas fa-phone"></i> <span class="text-white ">Tel: <span class="text-white fw text-decoration-none">+54 456 789</span></li>
+                <li><i class="fas fa-map-marker-alt"></i> <span class="text-white ">Dirección: <span class="text-white fw text-decoration-none">Calle Falsa 123, Buenos Aires Argentina</span></li>
+            </ul>
+        </div>
+        
+        
+        <div class="col-md-4">
+            <h5>Redes Sociales</h5>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="https://es-la.facebook.com/" class="text-white fw text-decoration-none">
+                        <i class="bi bi-facebook"></i>
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <a href="https://x.com/?lang=es" class="text-white fw text-decoration-none">
+                        <i class="bi bi-twitter"></i>
+                        Twitter
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/" class="text-white fw text-decoration-none">
+                        <i class="bi bi-instagram"></i>
+                        Instagram
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        
+        
+        <div class="col-md-4">
+            <h5>Enlaces Rápidos</h5>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="{% url 'home' %}" class="text-white fw text-decoration-none">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'disciplinas' %}" class="text-white fw text-decoration-none">
+                        <i class="fas fa-book"></i> Disciplinas
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'socios' %}" class="text-white fw text-decoration-none">
+                        <i class="fas fa-users"></i> Socios
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
 </div>

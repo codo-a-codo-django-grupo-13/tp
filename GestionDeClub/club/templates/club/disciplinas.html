@@ -1,25 +1,35 @@
-{% extends 'club/layout.html' %}
+{% extends "club/layout.html" %}
 
-{% block title %}CLUB Disciplinas{% endblock %}
+{% block title %}Disciplinas - Gestión de Club{% endblock %}
 
 {% block main_content %}
-    <div class="container mt-5">
 
-        <h1>Titulo Disciplinas</h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi fugiat voluptatibus natus sit! Earum quidem alias iure assumenda magnam pariatur culpa, reprehenderit adipisci. Molestias, asperiores atque corporis ad at eaque!
-            Aliquam, a harum consequatur velit facilis iure quaerat adipisci fuga repellat consequuntur? Doloremque non accusantium, dolorem voluptatum qui, fugit reiciendis maiores distinctio quis consequuntur laboriosam tenetur aperiam itaque facilis incidunt.
-            Quaerat tempora minus animi ut distinctio, facilis illum aut eius? Unde est praesentium blanditiis quam, consequatur maxime magnam labore soluta vero reiciendis explicabo distinctio dolore suscipit, voluptates fuga accusamus. Voluptas?
-            Blanditiis commodi, deserunt minima cumque iste maxime ducimus. Dolorum dolores natus ad obcaecati numquam doloribus laboriosam et facere. Voluptatum laboriosam illo sed nostrum sit labore quas vel velit architecto eligendi?
-            Provident a, soluta, ab corrupti pariatur consequuntur esse hic sed eius quisquam id nemo? Repellat sequi voluptates delectus, sit asperiores illo excepturi voluptatum sunt alias aspernatur id. Dolorum, numquam eum?
-            Dolorem consectetur quis nihil adipisci, mollitia laboriosam eveniet, reprehenderit ea molestias expedita quibusdam vitae enim magnam ad architecto inventore? Tempore provident quibusdam dolorum iusto illo, quae incidunt assumenda asperiores facere.
-            Laborum quibusdam possimus impedit iste tempora hic nostrum delectus. Perferendis at fuga, error beatae quo tempora aliquam culpa rem fugit ipsa. Sed ea dolore exercitationem nulla ex molestias corrupti eius.
-            Enim amet hic, corporis praesentium recusandae dolorem dignissimos. Nulla nesciunt libero sapiente eligendi laboriosam, odio quis, temporibus placeat blanditiis impedit sequi quibusdam. Numquam iusto in, delectus nesciunt eveniet ducimus aliquid.
-            Odit accusamus, at labore, odio aliquam provident id tempora nemo debitis molestias accusantium. Rerum animi dolorem provident quae velit quidem quasi dolorum reprehenderit unde nisi ipsum tempora, dolores molestias voluptatum?
-            Perferendis sequi voluptas dicta cumque. Nostrum sapiente labore sequi quisquam qui tempore ratione veritatis iure similique, tempora consequatur velit? Cupiditate fuga quisquam quas vel quam? Illum possimus officiis quos saepe.
-            Beatae error numquam voluptas enim minima cum, aliquam facere soluta odio excepturi reprehenderit quibusdam. Repellat libero excepturi veniam sit. Numquam ratione fugiat rem modi, enim quas at aliquam tempora repudiandae.
-            Voluptates nostrum quasi eum molestiae! Eos saepe distinctio voluptate fuga blanditiis, officiis soluta enim reprehenderit praesentium dolor, nobis ipsum repellat neque provident quos quidem. Voluptatem consectetur vitae ducimus eveniet corrupti!
-        </p>
-
-    </div>
+{% block extra_head %}
+    {% load static %}
+    <style>
+        body {
+            background-image: url('{% static 'club/img/fo7.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            
+        }
+    </style>
 {% endblock %}
+<div class="container mt-4">
+    <h2 ><span class="text-#212529 fw-bold text-decoration-none">Disciplinas</h2>
+    <p>Lista de disciplinas ofrecidas por el club:</p>
+    <ul>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Fútbol</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Baloncesto</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Natación</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Tenis</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Atletismo</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Artes Marciales</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Ciclismo</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Gimnasia</li>
+        <li><span class="text-#212529 fw-bold text-decoration-none">Boxeo</li>
+
+    </ul>
+</div>
+{% endblock %}
+
