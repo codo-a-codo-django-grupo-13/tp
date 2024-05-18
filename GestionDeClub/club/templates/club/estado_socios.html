@@ -1,0 +1,42 @@
+{% extends "club/layout.html" %}
+
+{% block title %}Estado de Socios - Gestión de Club{% endblock %}
+
+{% block main_content %}
+{% block extra_head %}
+    {% load static %}
+    <style>
+        body {
+            background-image: url('{% static 'club/img/fo4.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            
+        }
+    </style>
+{% endblock %}
+<div class="container mt-4">
+    <h2><span class="text-#212529 fw-bold text-decoration-none">Estado de Socios</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for socio in socios %}
+            <tr>
+                <td>{{ socio.nombre }}</td>
+                <td>{{ socio.apellido }}</td>
+                <td>{{ socio.email }}</td>
+                <td>{{ socio.telefono }}</td>
+                <td>{{ socio.direccion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

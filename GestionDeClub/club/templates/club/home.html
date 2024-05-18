@@ -2,6 +2,25 @@
 
 {% block title %}CLUB Home{% endblock %}
 
-{% block main_content %}
-    <div>Contenido del home</div>
+{% block extra_head %}
+    {% load static %}
+    <style>
+        body {
+            background-image: url('{% static 'club/img/fo1.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            
+        }
+    </style>
 {% endblock %}
+
+{% block main_content %}
+    <div class="container mt-5">
+
+        <h1 style="color:white;" class="fw-bold text-decoration-none">Gestión Deportiva</h1>
+        <h2 style="color:white;" class="fw-bold text-decoration-none"> ¡Bienvenido a Club Deportivo Total!</h2><br>
+
+    </div>
+{% endblock %}
+
+
