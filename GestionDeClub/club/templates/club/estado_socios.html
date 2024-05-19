@@ -1,39 +1,47 @@
-{% extends "club/layout.html" %}
+{% extends 'club/layout.html' %}
+{% load static %}
 
-{% block title %}Estado de Socios - Gestión de Club{% endblock %}
+{% block title %}
+Estado de Socios
+{% endblock %}
 
 {% block main_content %}
-{% block extra_head %}
-    {% load static %}
-    <style>
-        body {
-            background-image: url('{% static 'club/img/fo4.jpg' %}');
-            background-size: cover;
-            background-position: center;
-            
-        }
-    </style>
-{% endblock %}
-<div class="container mt-4">
-    <h2><span class="text-#212529 fw-bold text-decoration-none">Estado de Socios</h2>
-    <table class="table">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Estado de Socios</h1>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for socio in socios %}
             <tr>
+                <td>{{ socio.id }}</td>
                 <td>{{ socio.nombre }}</td>
                 <td>{{ socio.apellido }}</td>
                 <td>{{ socio.email }}</td>
-                <td>{{ socio.telefono }}</td>
-                <td>{{ socio.direccion }}</td>
+                <td>
+                    {% if socio.activo %}
+                    <span class="badge bg-success">Activo</span>
+                    {% else %}
+                    <span class="badge bg-danger">Inactivo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar_socio' socio.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_socio' socio.id %}">Eliminar</a>
+
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No hay socios registrados.</td>
             </tr>
             {% endfor %}
         </tbody>
