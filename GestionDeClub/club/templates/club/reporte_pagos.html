@@ -1,0 +1,27 @@
+{% extends 'club/layout.html' %}
+
+
+
+{% block title %}Reporte de Pagos{% endblock %}
+
+{% block main_content %}
+<div class="container mt-5">
+    <h2>Reporte de Pagos</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Socio</th>
+                <th>Total Pagado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pago in pagos_totales %}
+            <tr>
+                <td>{{ pago.socio__nombre }}</td> 
+                <td>{{ pago.total }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
