@@ -11,4 +11,5 @@ urlpatterns = [
     #path('editar_socio/<int:socio_id>/', views.editar_socio, name='editar_socio'),
     #path('eliminar_socio/<int:socio_id>/', views.eliminar_socio, name='eliminar_socio'),
     path('disciplinas/crear', views.disciplina_crear, name='disciplina_crear'),
+    path('disciplinas/editar/<int:disciplina_id>', views.disciplina_editar, name='disciplina_editar'),
 ]

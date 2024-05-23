@@ -20,8 +20,11 @@
             Lista de disciplinas ofrecidas por el club:
         </p>
         <ul>
-            {% for desciplina in disciplinas %}
-                <li><span class="text-#212529 fw-bold text-decoration-none">{{ desciplina }} <a href="#"><i class="bi bi-pencil"></i></a></li>
+            {% for k, desciplina in disciplinas.items %}
+                <li>
+                    <span class="text-#212529 fw-bold text-decoration-none">{{ desciplina.nombre }}</span>
+                    <a href="{% url 'disciplina_editar' 1 %}"><i class="bi bi-pencil"></i></a>
+                </li>
             {% endfor %}
         </ul>
     </div>
