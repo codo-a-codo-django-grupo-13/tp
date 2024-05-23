@@ -15,6 +15,12 @@ def disciplinas(request):
     }
     return render(request, 'club/disciplinas.html', context)
 
+def profesores(request):
+    context = {
+        'test': 'Test',
+    }
+    return render(request, 'club/profesores.html', context)
+
 def socios(request):
     context = {
         'test': 'Test',

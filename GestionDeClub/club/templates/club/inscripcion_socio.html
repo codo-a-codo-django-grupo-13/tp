@@ -7,10 +7,10 @@
     {% load static %}
     <style>
         body {
-            background-image: url('{% static 'club/img/fo7.jpg' %}');
+            background-image: url('{% static "club/img/fo7.jpg" %}');
             background-size: cover;
             background-position: center;
-            
+
         }
     </style>
 {% endblock %}
@@ -20,7 +20,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Inscribirse</button>
-        
+
     </form>
     <br>
 </div>
