@@ -9,63 +9,84 @@ def home(request):
     return render(request, 'club/home.html', context)
 
 
-def disciplinas(request):
+def disciplinas_listado(request):
     disciplinas = {
-        1: {'nombre': 'Fútbol', 'cuota': 8000},
-        2: {'nombre': 'Baloncesto', 'cuota': 6000},
-        3: {'nombre': 'Natación', 'cuota': 13000},
-        4: {'nombre': 'Tenis', 'cuota': 12000},
-        5: {'nombre': 'Atletismo', 'cuota': 8000},
-        6: {'nombre': 'Artes Marciales', 'cuota': 7000},
-        7: {'nombre': 'Ciclismo', 'cuota': 6000},
-        8: {'nombre': 'Gimnasio', 'cuota': 6000},
-        9: {'nombre': 'Boxeo', 'cuota': 9000}}
+        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
+        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
+        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
+        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
+        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
+        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
+        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
+        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
+        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
 
     context = {'disciplinas': disciplinas}
-    return render(request, 'club/disciplinas.html', context)
+    return render(request, 'club/disciplinas_listado.html', context)
 
 def disciplina_crear(request):
+    disciplinas = {
+        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
+        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
+        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
+        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
+        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
+        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
+        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
+        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
+        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
+    
     if request.method == "GET":
         form = DisciplinaForm()
     
     elif request.method == "POST":
         form = DisciplinaForm(request.POST)
         
-        if form.is_valid():            
-            messages.success(request, 'La Disciplina fue dado de alta con éxito')
+        if form.is_valid():
+            messages.success(request, 'La Disciplina fue hipotéticamente creada con éxito')
+            return redirect('disciplinas_listado')
 
-            return redirect('disciplinas')
+        else:
+            for complete_error in form.errors:
+                for error in form.errors[complete_error]:
+                    messages.error(request, error)
 
     context = {'form': form}
     return render(request, 'club/disciplina_crear.html', context)
 
-def disciplina_editar(request, disciplina_id):
+def disciplina_modificar(request, disciplina_id):
     disciplinas = {
-        1: {'nombre': 'Fútbol', 'cuota': 8000},
-        2: {'nombre': 'Baloncesto', 'cuota': 6000},
-        3: {'nombre': 'Natación', 'cuota': 13000},
-        4: {'nombre': 'Tenis', 'cuota': 12000},
-        5: {'nombre': 'Atletismo', 'cuota': 8000},
-        6: {'nombre': 'Artes Marciales', 'cuota': 7000},
-        7: {'nombre': 'Ciclismo', 'cuota': 6000},
-        8: {'nombre': 'Gimnasio', 'cuota': 6000},
-        9: {'nombre': 'Boxeo', 'cuota': 9000}}
+        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
+        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
+        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
+        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
+        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
+        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
+        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
+        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
+        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
     
-    disciplina = disciplinas[disciplina_id]
+    disciplina_activa = disciplinas[disciplina_id]
 
     if request.method == "GET":
-        form = DisciplinaForm(initial={'nombre': disciplina['nombre'], 'cuota': disciplina['cuota']})
+        form = DisciplinaForm(initial={'nombre': disciplina_activa['nombre'], 'cuota': disciplina_activa['cuota']})
     
     elif request.method == "POST":
         form = DisciplinaForm(request.POST)
         
-        if form.is_valid():            
-            messages.success(request, 'El alumno fue dado de alta con éxito')
+        if form.is_valid():
+            messages.success(request, 'La Disciplina fue modificada con éxito')
+            return redirect('disciplinas_listado')
+        
+        else:
+            for complete_error in form.errors:
+                for error in form.errors[complete_error]:
+                    messages.error(request, error)
 
-            return redirect('disciplinas')
-
-    context = {'form': form}
-    return render(request, 'club/disciplina_editar.html', context)
+    context = {
+        'form': form,
+        'disciplina_activa': disciplina_activa}
+    return render(request, 'club/disciplina_modificar.html', context)
 
 
 def profesores(request):

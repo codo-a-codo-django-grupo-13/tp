@@ -1,7 +1,7 @@
 {% extends "club/layout.html" %}
 {% load static %}
 
-{% block title %}GDEP - Disciplinas - Crear{% endblock %}
+{% block title %}GDEP - Disciplinas - Modificar{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'club/styles/disciplinas.css' %}">
@@ -21,14 +21,14 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url 'disciplinas_listado' %}" class="text-decoration-none">Listado</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+                        <li class="breadcrumb-item active" aria-current="page">Modificar</li>
                     </ol>
                 </nav>
             </div>
 
-            <form method="post" action="{% url 'disciplina_crear' %}">
+            <form method="post" action="{% url 'disciplina_modificar' disciplina_activa.id %}">
                 {% csrf_token %}
-
+                
                 <div class="row mb-3">
                     <div class="col">
                         <strong>{{ form.nombre.label }}</strong>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
             </form>
         </div>
     </div>
