@@ -1,0 +1,13 @@
+.navbar-nav .nav-link {
+    border-radius: 5px;
+    border: solid 1px transparent;
+}
+
+.navbar-nav .nav-link:hover:not(.active) {
+    border: solid 1px grey;
+}
+
+.navbar-nav .nav-link.active {
+    background-color: black;
+    border: solid 1px white;
+}

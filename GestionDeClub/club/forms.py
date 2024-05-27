@@ -1,35 +1,23 @@
-# club/forms.py
 from django import forms
-from .models import Socio
-from .models import Pago
 
+PROFESORES = {
+    "": "Seleccionar...",
+    "1": "Arnoldo André",
+    "2": "Esteban Peláez",
+    "3": "Carlos Paz",
+    "4": "Arturo Quick",
+    "5": "Paolo Malini",
+    "6": "Carla Buonanote",
+    "7": "Stella Maris Boido",
+}
 
-class SocioForm(forms.ModelForm):
-    class Meta:
-        model = Socio
-        fields = ['nombre', 'apellido', 'email', 'telefono', 'direccion','activo']
-        labels = {
-            'nombre': 'Nombre',
-            'apellido': 'Apellido',
-            'email': 'Correo Electrónico',
-            'telefono': 'Teléfono',
-            'direccion': 'Dirección',
-           
-            'activo':'activo'
-        }
-        widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su nombre'}),
-            'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su apellido'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su correo electrónico'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su número de teléfono'}),
-            'direccion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese su dirección'}),
- 
-       }
-        
-        
-# formularios para gestionar los pagos.
+class DisciplinaForm(forms.Form):
+    nombre = forms.CharField(label="Nombre")
+    cuota = forms.IntegerField(label="Cuota", required=False)
+    profesores = forms.ChoiceField(label="Profesor", choices=PROFESORES, required=False)
+    horarios = forms.CharField(widget=forms.Textarea, required=False)
 
-class PagoForm(forms.ModelForm):
-    class Meta:
-        model = Pago
-        fields = ['socio', 'fecha_pago', 'monto', 'descripcion']
+    def __init__(self, *args, **kwargs):
+        super(DisciplinaForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'

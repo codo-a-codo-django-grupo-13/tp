@@ -1,0 +1,60 @@
+{% extends "club/layout.html" %}
+{% load static humanize %}
+
+{% block title %}GDEP - Disciplinas{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'club/styles/disciplinas.css' %}">
+{% endblock %}
+
+
+{% block main_nav %}
+    {% include 'club/partials/main_nav.html' with active_nav='disciplinas' %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container my-5">
+        <div class="w-75 m-auto">
+            <h1>Disciplinas</h1>
+
+            <div class="d-flex justify-content-between mb-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Listado</li>
+                    </ol>
+                </nav>
+
+                <div>
+                    <a href="{% url 'disciplina_crear' %}" class="btn btn-primary btn-sm">Crear</a>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Horarios</th>
+                        <th scope="col">Profesor/a</th>
+                        <th scope="col" class="text-end">Cuota</th>
+                        <th scope="col" class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k, desciplina in disciplinas.items %}
+                        <tr>
+                            <td><span class="text-#212529 fw-bold">{{ desciplina.nombre }}</span></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">$ {{ desciplina.cuota|intcomma }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'disciplina_modificar' k %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                                <a href="{#% url 'disciplina_eliminar' k %#}" class="text-danger me-2"><i class="bi bi-trash"></i></a>
+                                <a href="{#% url 'disciplina_socios_listar' k %#}" class="text-black"><i class="bi bi-people"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

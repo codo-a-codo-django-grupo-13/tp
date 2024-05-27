@@ -1,0 +1,55 @@
+{% extends "club/layout.html" %}
+{% load static %}
+
+{% block title %}GDEP - Disciplinas - Modificar{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'club/styles/disciplinas.css' %}">
+{% endblock %}
+
+
+{% block main_nav %}
+    {% include 'club/partials/main_nav.html' %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container my-5">
+        <div class="w-75 m-auto">
+            <h1>Disciplinas</h1>
+
+            <div class="d-flex justify-content-between border-bottom border-black mb-2 pb-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'disciplinas_listado' %}" class="text-decoration-none">Listado</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Modificar</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <form method="post" action="{% url 'disciplina_modificar' disciplina_activa.id %}">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.nombre.label }}</strong>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.cuota.label }}</strong>
+                        {{ form.cuota }}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>{{ form.profesores.label }}</strong>
+                        {{ form.profesores }}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>{{ form.horarios.label }}</strong>
+                        {{ form.horarios }}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

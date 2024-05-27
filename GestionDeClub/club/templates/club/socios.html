@@ -1,30 +1,28 @@
 {% extends 'club/layout.html' %}
+{% load static %}
 
 {% block title %}CLUB Socios{% endblock %}
 
-{% block main_content %}
 {% block extra_head %}
-    {% load static %}
-    <style>
-        body {
-            background-image: url('{% static 'club/img/fo4.jpg' %}');
-            background-size: cover;
-            background-position: center;
-            
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'club/styles/socios.css' %}">
 {% endblock %}
-    <div class="container mt-5">
 
-        <h1> ¡Bienvenido a Club Deportivo Total!</h1><br>
+
+{% block main_nav %}
+    {% include 'club/partials/main_nav.html' with active_nav='socios' %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container mt-5">
+        <h1>Soci@s!</h1>
+        <p>Lista de socios/as:</p>
 
         <p>
-           
             En Club Deportivo Total, estamos comprometidos a ofrecerte una experiencia deportiva integral que abarca una amplia gama de disciplinas emocionantes. Desde el emocionante ritmo del fútbol hasta la elegancia del tenis, desde la fuerza y ​​la agilidad del baloncesto hasta la serenidad de la natación, nuestro club es el lugar donde se encuentran todas las pasiones deportivas.<br><br>
-            
+
             Nuestro objetivo en Club Deportivo Total es ofrecerte mucho más que solo un lugar para practicar deportes. Somos una comunidad dedicada de individuos apasionados que comparten el amor por el deporte y la búsqueda de la excelencia. Con entrenadores expertos y programas diseñados para desafiar y motivar, estamos aquí para ayudarte a alcanzar tus metas deportivas, ya sea que estés buscando competir al más alto nivel o simplemente mantenerte activo y saludable.
-            
-            <br><br>Únete a nosotros en Club Deportivo Total y descubre un mundo de oportunidades para mejorar tu juego, conectarte con otros entusiastas del deporte y formar parte de una comunidad vibrante. Regístrate hoy mismo y únete a nosotros en este emocionante viaje deportivo. 
+
+            <br><br>Únete a nosotros en Club Deportivo Total y descubre un mundo de oportunidades para mejorar tu juego, conectarte con otros entusiastas del deporte y formar parte de una comunidad vibrante. Regístrate hoy mismo y únete a nosotros en este emocionante viaje deportivo.
         </p>
 
     </div>
