@@ -1,6 +1,7 @@
 from django import forms
 
 PROFESORES = {
+    "": "Seleccionar...",
     "1": "Arnoldo André",
     "2": "Esteban Peláez",
     "3": "Carlos Paz",
