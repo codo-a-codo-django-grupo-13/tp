@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import DisciplinaForm
+from .models import Disciplina
 
 
 def home(request):
@@ -10,32 +11,12 @@ def home(request):
 
 
 def disciplinas_listado(request):
-    disciplinas = {
-        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
-        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
-        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
-        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
-        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
-        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
-        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
-        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
-        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
-
+    disciplinas = Disciplina.objects.all()
+    print(disciplinas)
     context = {'disciplinas': disciplinas}
     return render(request, 'club/disciplinas_listado.html', context)
 
 def disciplina_crear(request):
-    disciplinas = {
-        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
-        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
-        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
-        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
-        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
-        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
-        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
-        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
-        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
-    
     if request.method == "GET":
         form = DisciplinaForm()
     
@@ -43,7 +24,8 @@ def disciplina_crear(request):
         form = DisciplinaForm(request.POST)
         
         if form.is_valid():
-            messages.success(request, 'La Disciplina fue hipotéticamente creada con éxito')
+            disciplina = form.save()
+            messages.success(request, f'La Disciplina {disciplina} fue creada con éxito')
             return redirect('disciplinas_listado')
 
         else:
@@ -55,27 +37,17 @@ def disciplina_crear(request):
     return render(request, 'club/disciplina_crear.html', context)
 
 def disciplina_modificar(request, disciplina_id):
-    disciplinas = {
-        1: {'id': 1, 'nombre': 'Fútbol', 'cuota': 8000},
-        2: {'id': 2, 'nombre': 'Baloncesto', 'cuota': 6000},
-        3: {'id': 3, 'nombre': 'Natación', 'cuota': 13000},
-        4: {'id': 4, 'nombre': 'Tenis', 'cuota': 12000},
-        5: {'id': 5, 'nombre': 'Atletismo', 'cuota': 8000},
-        6: {'id': 6, 'nombre': 'Artes Marciales', 'cuota': 7000},
-        7: {'id': 7, 'nombre': 'Ciclismo', 'cuota': 6000},
-        8: {'id': 8, 'nombre': 'Gimnasio', 'cuota': 6000},
-        9: {'id': 9, 'nombre': 'Boxeo', 'cuota': 9000}}
-    
-    disciplina_activa = disciplinas[disciplina_id]
+    disciplina_activa = Disciplina.objects.get(id=disciplina_id)
 
     if request.method == "GET":
-        form = DisciplinaForm(initial={'nombre': disciplina_activa['nombre'], 'cuota': disciplina_activa['cuota']})
+        form = DisciplinaForm(instance=disciplina_activa)
     
     elif request.method == "POST":
-        form = DisciplinaForm(request.POST)
+        form = DisciplinaForm(request.POST, instance=disciplina_activa)
         
         if form.is_valid():
-            messages.success(request, 'La Disciplina fue modificada con éxito')
+            disciplina = form.save()
+            messages.success(request, f'La Disciplina {disciplina} fue modificada con éxito')
             return redirect('disciplinas_listado')
         
         else:
@@ -88,6 +60,13 @@ def disciplina_modificar(request, disciplina_id):
         'disciplina_activa': disciplina_activa}
     return render(request, 'club/disciplina_modificar.html', context)
 
+def disciplina_eliminar(request, disciplina_id):
+    disciplina_activa = Disciplina.objects.get(id=disciplina_id)
+
+    disciplina_activa.delete()
+
+    messages.success(request, f'La Disciplina {disciplina_activa} fue eliminada con éxito')
+    return redirect('disciplinas_listado')
 
 def profesores(request):
     context = {'test': 'Test'}
