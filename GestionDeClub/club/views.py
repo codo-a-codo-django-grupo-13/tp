@@ -136,6 +136,10 @@ class DisciplinaDeleteView(DeleteView):
     #    # Opcional: puedes anular este método si necesitas lógica adicional para determinar la URL de éxito
     #    return reverse_lazy('nombre-de-la-url-de-exito')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_name'] = self.get_object().nombre
+        return context
 
 '''########'''
 ''' PROFES '''
@@ -144,7 +148,7 @@ class ProfeListView(ListView):
     model = Profe
     template_name = 'club/profes_listado.html'
     context_object_name = 'profes'
-    
+
 
 class ProfeCreateView(CreateView):
     model = Profe
@@ -160,7 +164,7 @@ class ProfeUpdateView(UpdateView):
 
 class ProfeDeleteView(DeleteView):
     model = Profe
-    template_name = 'club/profe_confirmacion_eliminar.html'
+    #template_name = 'club/profe_confirmacion_eliminar.html'
     success_url = reverse_lazy('profes_listado')
 
 '''########'''
