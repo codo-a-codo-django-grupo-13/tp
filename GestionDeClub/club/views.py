@@ -15,9 +15,8 @@ def home(request):
 '''#############'''
 ''' DISCIPLINAS '''
 
-
 '''
-# Descartamos las Vistas basada en Funciones
+# Descartamos las Vistas basadas en Funciones
 def disciplinas_listado(request):
     disciplinas = Disciplina.objects.all()
     print(disciplinas)
@@ -35,8 +34,9 @@ class DisciplinaListView(ListView):
     #def get_queryset(self):
     #    return Disciplina.objects.filter(...)
 
+
 '''
-# Descartamos las Vistas basada en Funciones
+# Descartamos las Vistas basadas en Funciones
 def disciplina_crear(request):
     if request.method == "GET":
         form = DisciplinaForm()
@@ -72,6 +72,9 @@ class DisciplinaCreateView(CreateView):
     #def get_success_url(self):
     #    return reverse_lazy('disciplinas_listado')
 
+
+'''
+# Descartamos las Vistas basadas en Funciones
 def disciplina_modificar(request, disciplina_id):
     disciplina_activa = Disciplina.objects.get(id=disciplina_id)
 
@@ -95,6 +98,23 @@ def disciplina_modificar(request, disciplina_id):
         'form': form,
         'disciplina_activa': disciplina_activa}
     return render(request, 'club/disciplina_modificar.html', context)
+'''
+
+class DisciplinaUpdateView(UpdateView):
+    model = Disciplina
+    form_class = DisciplinaForm
+    template_name = 'club/disciplina_modificar.html'
+    success_url = reverse_lazy('disciplinas_listado')
+
+    #def form_valid(self, form):
+    #    # Opcional: lógica adicional para procesar el formulario si es válido
+    #    # Por defecto, guarda los cambios en el objeto en la base de datos
+    #    return super().form_valid(form)
+
+    #def get_success_url(self):
+    #    # Opcional: redirige al usuario a una URL específica después de actualizar el objeto
+    #    return '/ruta-de-exito/'
+
 
 def disciplina_eliminar(request, disciplina_id):
     disciplina_activa = Disciplina.objects.get(id=disciplina_id)

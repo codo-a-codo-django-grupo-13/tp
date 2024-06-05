@@ -9,3 +9,7 @@ Eliminar una Disciplina lanza un cartelito provisorio de confirmación con javas
 
 * Meterle íconos a los Tipos de Objetos
 Disciplinas, Profes y Socios podrían tener algún ícono identificatorio que permita ambientarse más rápido asociándolo visualmente a cada Clase
+
+* Validar campo Cuota en Disciplinas
+Ver que no se puedan ingresar caracteres (lado cliente)
+Y que si se ingresaran no permita guardar (lado servidor)
