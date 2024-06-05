@@ -44,11 +44,11 @@
                         <tr>
                             <td><span class="text-#212529 fw-bold">{{ disciplina.nombre }}</span></td>
                             <td class="small">{{ disciplina.horarios }}</td>
-                            <td>{{ disciplina.profe }}</td>
-                            <td class="text-end">{% if disciplina.cuota %}$ {{ disciplina.cuota|intcomma }}{% else %}<span class="small">Consultar</span>{% endif %}</td>
+                            <td>{% if disciplina.profe %}{{ disciplina.profe }}{% else %}-{% endif %}</td>
+                            <td class="text-end text-nowrap">{% if disciplina.cuota %}$ {{ disciplina.cuota|intcomma }}{% else %}<span class="small">Consultar</span>{% endif %}</td>
                             <td class="text-center">
-                                <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
-                                <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'disciplina_eliminar' disciplina.id %}"><i class="bi bi-trash"></i></a>
+                                <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-1"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="text-danger me-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'disciplina_eliminar' disciplina.id %}"><i class="bi bi-trash"></i></a>
                                 <a href="{#% url 'disciplina_socios_listar' disciplina.id %#}" class="text-black"><i class="bi bi-people"></i></a>
                             </td>
                         </tr>

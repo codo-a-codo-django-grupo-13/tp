@@ -47,9 +47,19 @@
                             <td><span class="text-#212529 fw-bold">{{ profe.nombre }}</span></td>
                             <td><span class="text-#212529 fw-bold">{{ profe.apellido }}</span></td>
                             <td>{{ profe.dni }}</td>
-                            <td>{{ profe.email }}</td>
+                            <td>{% if profe.email %}{{ profe.email }}{% else %}-{% endif %}</td>
                             <td>{{ profe.cuit }}</td>
-                            <td></td>
+                            <td>
+                                {% if profe.disciplinas.all.count > 0 %}
+                                    <ul>
+                                        {% for disciplina in profe.disciplinas.all %}
+                                            <li>{{ disciplina.nombre }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
                             <td class="text-center">
                                 <a href="{% url 'profe_modificar' profe.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
                                 <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'profe_eliminar' profe.id %}"><i class="bi bi-trash"></i></a>
