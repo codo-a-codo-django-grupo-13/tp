@@ -12,6 +12,12 @@ urlpatterns = [
     path('profes/modificar/<int:pk>', views.ProfeUpdateView.as_view(), name='profe_modificar'),
     path('profes/eliminar/<int:pk>', views.ProfeDeleteView.as_view(), name='profe_eliminar'),
     path('socios/', views.SocioListView.as_view(), name='socios_listado'),
+    path('socios/crear', views.SocioCreateView.as_view(), name='socio_crear'),
+    path('socios/modificar/<int:pk>', views.SocioUpdateView.as_view(), name='socio_modificar'),
+    path('socios/eliminar/<int:pk>', views.SocioDeleteView.as_view(), name='socio_eliminar'),
+
+
+
     #path('inscripcion_socio/', views.inscripcion_socio, name='inscripcion_socio'),
     #path('estado_socios/', views.estado_socios, name='estado_socios'),
     #path('editar_socio/<int:socio_id>/', views.editar_socio, name='editar_socio'),

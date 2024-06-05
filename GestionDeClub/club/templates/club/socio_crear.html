@@ -1,0 +1,60 @@
+{% extends "club/layout.html" %}
+{% load static %}
+
+{% block title %}GDEP - Socios - Crear{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'club/styles/socios.css' %}">
+{% endblock %}
+
+
+{% block main_nav %}
+    {% include 'club/partials/main_nav.html' %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container my-5">
+        <div class="w-75 m-auto">
+            <h1>Socios</h1>
+
+            <div class="d-flex justify-content-between border-bottom border-black mb-2 pb-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'socios_listado' %}" class="text-decoration-none">Listado</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <form method="post" action="{% url 'socio_crear' %}">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.nombre.label }}</strong>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.apellido.label }}</strong>
+                        {{ form.apellido }}
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.dni.label }}</strong>
+                        {{ form.dni }}
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.email.label }}</strong>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <strong>{{ form.numero.label }}</strong>
+                        {{ form.numero }}
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

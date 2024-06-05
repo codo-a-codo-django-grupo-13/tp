@@ -1,0 +1,64 @@
+{% extends 'club/layout.html' %}
+{% load static %}
+
+{% block title %}Socios{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'club/styles/socios.css' %}">
+{% endblock %}
+
+
+{% block main_nav %}
+    {% include 'club/partials/main_nav.html' with active_nav='socios' %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="container my-5">
+        <div class="w-75 m-auto">
+            <h1>Socios</h1>
+
+            <div class="d-flex justify-content-between mb-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Listado</li>
+                    </ol>
+                </nav>
+
+                <div>
+                    <a href="{% url 'socio_crear' %}" class="btn btn-primary btn-sm">Crear</a>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Socio Nro.</th>
+                        <!-- <th scope="col">Disciplina</th> -->
+                        <th scope="col" class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for socio in socios %}
+                        <tr>
+                            <td><span class="text-#212529 fw-bold">{{ socio.nombre }}</span></td>
+                            <td><span class="text-#212529 fw-bold">{{ socio.apellido }}</span></td>
+                            <td>{{ socio.dni }}</td>
+                            <td>{{ socio.email }}</td>
+                            <td>{{ socio.numero }}</td>
+                            <!-- <td></td> -->
+                            <td class="text-center">
+                                <a href="{% url 'socio_modificar' socio.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'socio_eliminar' socio.id %}"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

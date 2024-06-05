@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
 
-from .forms import DisciplinaForm, ProfeForm
+from .forms import DisciplinaForm, ProfeForm, SocioForm
 from .models import Disciplina, Profe, Socio
 
 
@@ -174,3 +174,20 @@ class SocioListView(ListView):
     model = Socio
     template_name = 'club/socios_listado.html'
     context_object_name = 'socios'
+
+class SocioCreateView(CreateView):
+    model = Socio
+    form_class = SocioForm
+    template_name = 'club/socio_crear.html'
+    success_url = reverse_lazy('socios_listado')
+
+class SocioUpdateView(UpdateView):
+    model = Socio
+    form_class = SocioForm
+    template_name = 'club/socio_modificar.html'
+    success_url = reverse_lazy('socios_listado')
+
+class SocioDeleteView(DeleteView):
+    model = Socio
+    #template_name = 'club/socio_confirmacion_eliminar.html'
+    success_url = reverse_lazy('socios_listado')
