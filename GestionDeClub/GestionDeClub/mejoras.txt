@@ -1,11 +1,14 @@
+> AGREGAR EN PENDIENTES LAS COSAS QUE VAYAN SURGIENDO
+> QUITAR DE PENDIENTES Y PONER EN RESUELTAS LAS QUE YA ESTÉN HECHAS
+
+::::::::::::::::
+:: PENDIENTES ::
+
 * Colocar una X para cerrar los mensajes que aparecen en la parte superior:
 Ahora quedan ahí y es medio molesto, sería bueno que el usuario pueda cerrarlo una vez leído, o que desaparezca después de cierta cantidad de segundos
 
 * Diferenciar mensajes:
 Ahora se están mostrando todos celestes, un mensaje de éxito como puede ser "Disciplina creada correctamente" debería mostrarse distinto que un mensaje del estilo "Ya existe una disciplina con ese nombre"
-
-* Cambiar el cartel provisorio de la acción de Eliminar:
-Eliminar una Disciplina lanza un cartelito provisorio de confirmación con javascript pelado, sería bueno cambiarlo por un modal de bootstrap o algo más lindo
 
 * Meterle íconos a los Tipos de Objetos
 Disciplinas, Profes y Socios podrían tener algún ícono identificatorio que permita ambientarse más rápido asociándolo visualmente a cada Clase
@@ -13,3 +16,12 @@ Disciplinas, Profes y Socios podrían tener algún ícono identificatorio que pe
 * Validar campo Cuota en Disciplinas
 Ver que no se puedan ingresar caracteres (lado cliente)
 Y que si se ingresaran no permita guardar (lado servidor)
+
+* Personalizarel cartelito de Eliminar
+
+
+:::::::::::::::
+:: RESUELTAS ::
+
+* Cambiar el cartel provisorio de la acción de Eliminar:
+Eliminar una Disciplina lanza un cartelito provisorio de confirmación con javascript pelado, sería bueno cambiarlo por un modal de bootstrap o algo más lindo
