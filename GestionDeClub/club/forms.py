@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Disciplina
+from .models import Disciplina, Profe
 
 
 class DisciplinaForm(forms.ModelForm):
@@ -18,21 +18,25 @@ class DisciplinaForm(forms.ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
-
-'''
-from django import forms
-from .models import Profe, Socio
-
 class ProfeForm(forms.ModelForm):
     class Meta:
         model = Profe
-        fields = '__all__'
+        fields = ['nombre', 'apellido', 'dni', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(ProfeForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
     def clean_dni(self):
         dni = self.cleaned_data['dni']
         if Profe.objects.filter(dni=dni).exclude(id=self.instance.id).exists():
             raise forms.ValidationError('Este DNI ya existe para un Profe.')
         return dni
+
+'''
+from django import forms
+from .models import Socio
 
 class SocioForm(forms.ModelForm):
     class Meta:

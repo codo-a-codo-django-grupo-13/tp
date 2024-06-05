@@ -1,7 +1,7 @@
 {% extends 'club/layout.html' %}
 {% load static %}
 
-{% block title %}CLUB Profesores{% endblock %}
+{% block title %}Profes{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'club/styles/profesores.css' %}">
@@ -25,7 +25,7 @@
                 </nav>
 
                 <div>
-                    <a href="{% url 'disciplina_crear' %}" class="btn btn-primary btn-sm">Crear</a>
+                    <a href="{% url 'profe_crear' %}" class="btn btn-primary btn-sm">Crear</a>
                 </div>
             </div>
 
@@ -46,14 +46,14 @@
                         <tr>
                             <td><span class="text-#212529 fw-bold">{{ profe.nombre }}</span></td>
                             <td><span class="text-#212529 fw-bold">{{ profe.apellido }}</span></td>
-                            <td>{{ disciplina.dni }}</td>
-                            <td>{{ disciplina.email }}</td>
-                            <td>{{ disciplina.cuit }}</td>
+                            <td>{{ profe.dni }}</td>
+                            <td>{{ profe.email }}</td>
+                            <td>{{ profe.cuit }}</td>
                             <td></td>
                             <td class="text-center">
-                                <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
-                                <a href="{% url 'disciplina_eliminar' disciplina.id %}" onclick="return confirmarEliminacion()" class="text-danger me-2"><i class="bi bi-trash"></i></a>
-                                <a href="{#% url 'disciplina_socios_listar' disciplina.id %#}" class="text-black"><i class="bi bi-people"></i></a>
+                                <a href="{% url 'profe_modificar' profe.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                                <a href="{% url 'profe_eliminar' profe.id %}" onclick="return confirmarEliminacion()" class="text-danger me-2"><i class="bi bi-trash"></i></a>
+                                <a href="{#% url 'profe_socios_listar' profe.id %#}" class="text-black"><i class="bi bi-people"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

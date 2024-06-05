@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
 
-from .forms import DisciplinaForm
+from .forms import DisciplinaForm, ProfeForm
 from .models import Disciplina, Profe, Socio
 
 
@@ -43,7 +43,7 @@ def disciplina_crear(request):
 
     elif request.method == "POST":
         form = DisciplinaForm(request.POST)
-        
+
         if form.is_valid():
             disciplina = form.save()
             messages.success(request, f'La Disciplina {disciplina} fue creada con éxito')
@@ -80,15 +80,15 @@ def disciplina_modificar(request, disciplina_id):
 
     if request.method == "GET":
         form = DisciplinaForm(instance=disciplina_activa)
-    
+
     elif request.method == "POST":
         form = DisciplinaForm(request.POST, instance=disciplina_activa)
-        
+
         if form.is_valid():
             disciplina = form.save()
             messages.success(request, f'La Disciplina {disciplina} fue modificada con éxito')
             return redirect('disciplinas_listado')
-        
+
         else:
             for complete_error in form.errors:
                 for error in form.errors[complete_error]:
@@ -135,7 +135,7 @@ class DisciplinaDeleteView(DeleteView):
     #def get_success_url(self):
     #    # Opcional: puedes anular este método si necesitas lógica adicional para determinar la URL de éxito
     #    return reverse_lazy('nombre-de-la-url-de-exito')
-    
+
 
 '''########'''
 ''' PROFES '''
@@ -145,6 +145,22 @@ class ProfeListView(ListView):
     template_name = 'club/profes_listado.html'
     context_object_name = 'profes'
 
+class ProfeCreateView(CreateView):
+    model = Profe
+    form_class = ProfeForm
+    template_name = 'club/profe_crear.html'
+    success_url = reverse_lazy('profes_listado')
+
+class ProfeUpdateView(UpdateView):
+    model = Profe
+    form_class = ProfeForm
+    template_name = 'club/profe_modificar.html'
+    success_url = reverse_lazy('profes_listado')
+
+class ProfeDeleteView(DeleteView):
+    model = Profe
+    template_name = 'club/profe_confirmacion_eliminar.html'
+    success_url = reverse_lazy('profes_listado')
 
 '''########'''
 ''' SOCIOS '''
