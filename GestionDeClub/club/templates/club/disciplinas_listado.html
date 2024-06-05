@@ -34,7 +34,7 @@
                     <tr class="table-dark">
                         <th scope="col">Nombre</th>
                         <th scope="col">Horarios</th>
-                        <th scope="col">Profesor/a</th>
+                        <th scope="col">Profe</th>
                         <th scope="col" class="text-end">Cuota</th>
                         <th scope="col" class="text-center">Acciones</th>
                     </tr>
@@ -44,7 +44,7 @@
                         <tr>
                             <td><span class="text-#212529 fw-bold">{{ disciplina.nombre }}</span></td>
                             <td class="small">{{ disciplina.horarios }}</td>
-                            <td></td>
+                            <td>{{ disciplina.profe }}</td>
                             <td class="text-end">{% if disciplina.cuota %}$ {{ disciplina.cuota|intcomma }}{% else %}<span class="small">Consultar</span>{% endif %}</td>
                             <td class="text-center">
                                 <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-2"><i class="bi bi-pencil"></i></a>

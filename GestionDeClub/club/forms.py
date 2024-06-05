@@ -7,7 +7,7 @@ class DisciplinaForm(forms.ModelForm):
     class Meta:
         model = Disciplina
         #fields = "__all__"
-        fields = ['nombre', 'cuota','horarios']
+        fields = ['nombre', 'cuota', 'horarios', 'profe']
         widgets = {
             'horarios': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
         }
@@ -21,7 +21,7 @@ class DisciplinaForm(forms.ModelForm):
 class ProfeForm(forms.ModelForm):
     class Meta:
         model = Profe
-        fields = ['nombre', 'apellido', 'dni', 'email']
+        fields = ['nombre', 'apellido', 'dni', 'email', 'cuit']
 
     def __init__(self, *args, **kwargs):
         super(ProfeForm, self).__init__(*args, **kwargs)
