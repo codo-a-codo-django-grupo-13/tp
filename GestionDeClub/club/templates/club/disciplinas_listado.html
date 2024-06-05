@@ -48,7 +48,7 @@
                             <td class="text-end">{% if disciplina.cuota %}$ {{ disciplina.cuota|intcomma }}{% else %}<span class="small">Consultar</span>{% endif %}</td>
                             <td class="text-center">
                                 <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
-                                <a href="{% url 'disciplina_eliminar' disciplina.id %}" onclick="return confirmarEliminacion()" class="text-danger me-2"><i class="bi bi-trash"></i></a>
+                                <a href="{% url 'disciplina_eliminar' disciplina.id %}" class="text-danger me-2"><i class="bi bi-trash"></i></a>
                                 <a href="{#% url 'disciplina_socios_listar' disciplina.id %#}" class="text-black"><i class="bi bi-people"></i></a>
                             </td>
                         </tr>
@@ -57,13 +57,4 @@
             </table>
         </div>
     </div>
-{% endblock %}
-
-
-{% block scripts %}
-<script>
-    function confirmarEliminacion() {
-        return confirm("¿Estás seguro de que deseas eliminar esta disciplina?");
-    }
-</script>
 {% endblock %}

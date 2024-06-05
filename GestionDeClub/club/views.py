@@ -116,6 +116,8 @@ class DisciplinaUpdateView(UpdateView):
     #    return '/ruta-de-exito/'
 
 
+'''
+# Descartamos las Vistas basadas en Funciones
 def disciplina_eliminar(request, disciplina_id):
     disciplina_activa = Disciplina.objects.get(id=disciplina_id)
 
@@ -123,7 +125,17 @@ def disciplina_eliminar(request, disciplina_id):
 
     messages.success(request, f'La Disciplina {disciplina_activa} fue eliminada con éxito')
     return redirect('disciplinas_listado')
+'''
 
+class DisciplinaDeleteView(DeleteView):
+    model = Disciplina
+    template_name = 'club/disciplina_confirmacion_eliminar.html'
+    success_url = reverse_lazy('disciplinas_listado')
+
+    #def get_success_url(self):
+    #    # Opcional: puedes anular este método si necesitas lógica adicional para determinar la URL de éxito
+    #    return reverse_lazy('nombre-de-la-url-de-exito')
+    
 
 '''########'''
 ''' PROFES '''
