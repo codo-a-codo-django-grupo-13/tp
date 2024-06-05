@@ -144,6 +144,7 @@ class ProfeListView(ListView):
     model = Profe
     template_name = 'club/profes_listado.html'
     context_object_name = 'profes'
+    
 
 class ProfeCreateView(CreateView):
     model = Profe

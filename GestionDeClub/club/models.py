@@ -8,7 +8,7 @@ class Disciplina(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     horarios = models.CharField(max_length=500)
     cuota = models.PositiveIntegerField(null=True, blank=True)
-    profe = models.ForeignKey('Profe', on_delete=models.SET_NULL, null=True, blank=True)
+    profe = models.ForeignKey('Profe', related_name='disciplinas', on_delete=models.SET_NULL, null=True, blank=True)
     #socios =
 
     class Meta:
