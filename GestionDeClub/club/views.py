@@ -129,7 +129,7 @@ def disciplina_eliminar(request, disciplina_id):
 
 class DisciplinaDeleteView(DeleteView):
     model = Disciplina
-    template_name = 'club/disciplina_confirmacion_eliminar.html'
+    #template_name = 'club/disciplina_confirmacion_eliminar.html'
     success_url = reverse_lazy('disciplinas_listado')
 
     #def get_success_url(self):
