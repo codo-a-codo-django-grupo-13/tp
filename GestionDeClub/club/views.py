@@ -107,13 +107,10 @@ class DisciplinaUpdateView(UpdateView):
     success_url = reverse_lazy('disciplinas_listado')
 
     #def form_valid(self, form):
-    #    # Opcional: lógica adicional para procesar el formulario si es válido
-    #    # Por defecto, guarda los cambios en el objeto en la base de datos
     #    return super().form_valid(form)
 
     #def get_success_url(self):
-    #    # Opcional: redirige al usuario a una URL específica después de actualizar el objeto
-    #    return '/ruta-de-exito/'
+    #    return reverse_lazy('disciplinas_listado')
 
 
 '''
@@ -133,13 +130,13 @@ class DisciplinaDeleteView(DeleteView):
     success_url = reverse_lazy('disciplinas_listado')
 
     #def get_success_url(self):
-    #    # Opcional: puedes anular este método si necesitas lógica adicional para determinar la URL de éxito
-    #    return reverse_lazy('nombre-de-la-url-de-exito')
+    #    return reverse_lazy('disciplinas_listado')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object_name'] = self.get_object().nombre
+        context['object_name'] = self.get_object()
         return context
+
 
 '''########'''
 ''' PROFES '''
