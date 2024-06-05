@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.urls import reverse, reverse_lazy
 
 from .forms import DisciplinaForm
-from .models import Disciplina
+from .models import Disciplina, Profe, Socio
 
 
 def home(request):
@@ -10,16 +12,35 @@ def home(request):
     return render(request, 'club/home.html', context)
 
 
+'''#############'''
+''' DISCIPLINAS '''
+
+
+'''
+# Descartamos las Vistas basada en Funciones
 def disciplinas_listado(request):
     disciplinas = Disciplina.objects.all()
     print(disciplinas)
     context = {'disciplinas': disciplinas}
-    return render(request, 'club/disciplinas_listado.html', context)
 
+    return render(request, 'club/disciplinas_listado.html', context)
+'''
+
+class DisciplinaListView(ListView):
+    model = Disciplina
+    template_name = 'club/disciplinas_listado.html'
+    context_object_name = 'disciplinas'
+
+    # Descomentar si en el futuro queremos filtrar los objetos, por ejemplo por Disciplinas Activas
+    #def get_queryset(self):
+    #    return Disciplina.objects.filter(...)
+
+'''
+# Descartamos las Vistas basada en Funciones
 def disciplina_crear(request):
     if request.method == "GET":
         form = DisciplinaForm()
-    
+
     elif request.method == "POST":
         form = DisciplinaForm(request.POST)
         
@@ -35,6 +56,21 @@ def disciplina_crear(request):
 
     context = {'form': form}
     return render(request, 'club/disciplina_crear.html', context)
+'''
+
+class DisciplinaCreateView(CreateView):
+    model = Disciplina
+    form_class = DisciplinaForm
+    template_name = 'club/disciplina_crear.html'
+    success_url = reverse_lazy('disciplinas_listado')
+
+    # Descomentar si hay lógica que agregar en el procesamiento del formulario
+    #def form_valid(self, form):
+    #    return super().form_valid(form)
+
+    # Descomentar si hace falta especificar una redirección con parámetros
+    #def get_success_url(self):
+    #    return reverse_lazy('disciplinas_listado')
 
 def disciplina_modificar(request, disciplina_id):
     disciplina_activa = Disciplina.objects.get(id=disciplina_id)
@@ -68,11 +104,20 @@ def disciplina_eliminar(request, disciplina_id):
     messages.success(request, f'La Disciplina {disciplina_activa} fue eliminada con éxito')
     return redirect('disciplinas_listado')
 
-def profesores(request):
-    context = {'test': 'Test'}
-    return render(request, 'club/profesores.html', context)
+
+'''########'''
+''' PROFES '''
+
+class ProfeListView(ListView):
+    model = Profe
+    template_name = 'club/profes_listado.html'
+    context_object_name = 'profes'
 
 
-def socios(request):
-    context = {'test': 'Test'}
-    return render(request, 'club/socios.html', context)
+'''########'''
+''' SOCIOS '''
+
+class SocioListView(ListView):
+    model = Socio
+    template_name = 'club/socios_listado.html'
+    context_object_name = 'socios'
