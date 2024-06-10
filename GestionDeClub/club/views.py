@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
@@ -63,6 +64,7 @@ class DisciplinaCreateView(CreateView):
     form_class = DisciplinaForm
     template_name = 'club/disciplina_crear.html'
     success_url = reverse_lazy('disciplinas_listado')
+
 
     # Descomentar si hay lógica que agregar en el procesamiento del formulario
     #def form_valid(self, form):
@@ -147,22 +149,25 @@ class ProfeListView(ListView):
     context_object_name = 'profes'
 
 
-class ProfeCreateView(CreateView):
+class ProfeCreateView(SuccessMessageMixin, CreateView):
     model = Profe
     form_class = ProfeForm
     template_name = 'club/profe_crear.html'
     success_url = reverse_lazy('profes_listado')
+    success_message = 'Profe %(nombre)s %(apellido)s creado!'
 
-class ProfeUpdateView(UpdateView):
+class ProfeUpdateView(SuccessMessageMixin, UpdateView):
     model = Profe
     form_class = ProfeForm
     template_name = 'club/profe_modificar.html'
     success_url = reverse_lazy('profes_listado')
+    success_message = 'Profe %(nombre)s %(apellido)s actualizado!'
 
-class ProfeDeleteView(DeleteView):
+class ProfeDeleteView(SuccessMessageMixin, DeleteView):
     model = Profe
     #template_name = 'club/profe_confirmacion_eliminar.html'
     success_url = reverse_lazy('profes_listado')
+    success_message = 'Profe %(nombre)s %(apellido)s eliminado!'
 
 '''########'''
 ''' SOCIOS '''
@@ -172,19 +177,22 @@ class SocioListView(ListView):
     template_name = 'club/socios_listado.html'
     context_object_name = 'socios'
 
-class SocioCreateView(CreateView):
+class SocioCreateView(SuccessMessageMixin, CreateView):
     model = Socio
     form_class = SocioForm
     template_name = 'club/socio_crear.html'
     success_url = reverse_lazy('socios_listado')
+    success_message = 'Socio %(nombre)s %(apellido)s creado!'
 
-class SocioUpdateView(UpdateView):
+class SocioUpdateView(SuccessMessageMixin, UpdateView):
     model = Socio
     form_class = SocioForm
     template_name = 'club/socio_modificar.html'
     success_url = reverse_lazy('socios_listado')
+    success_message = 'Socio %(nombre)s %(apellido)s actualizado!'
 
-class SocioDeleteView(DeleteView):
+class SocioDeleteView(SuccessMessageMixin, DeleteView):
     model = Socio
     #template_name = 'club/socio_confirmacion_eliminar.html'
     success_url = reverse_lazy('socios_listado')
+    success_message = 'Socio %(nombre)s %(apellido)s eliminado!'

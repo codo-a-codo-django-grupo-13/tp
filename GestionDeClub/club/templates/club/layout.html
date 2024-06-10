@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>GDEP - {% block title %}{% endblock %}</title>
-        
+
         <link rel="shortcut icon" type="image/png" href="{% static 'club/img/favicon.ico' %}">
 
         <!-- Bootstrap -->
@@ -14,20 +14,12 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'club/styles/layout.css' %}">
-        
+
         {% block extra_head %}{% endblock %}
     </head>
 
     <body class="d-flex flex-column min-vh-100">
         <header class="sticky-top bg-primary text-white">
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li {% if message.tags %} class="{{message.tags}}" {%endif%}> {{message}}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
             <nav class="navbar navbar-expand-lg bg-dark ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
@@ -44,6 +36,19 @@
         </header>
 
         <main class="flex-grow-1">
+            <div class="container my-2">
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        {% if form.errors %}
+                        <strong>Message: </strong> {{form.errors}}
+                        {% else %}
+                        <strong>Message: </strong> {{message}}
+                        {% endif %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+
             {% block main_content %}{% endblock %}
         </main>
 
@@ -51,7 +56,7 @@
             {% include 'club/partials/footer.html' %}
         </footer>
 
-        
+
         <!-- Modal de Bootstrap -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
