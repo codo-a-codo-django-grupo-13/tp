@@ -16,7 +16,8 @@ urlpatterns = [
     path('socios/modificar/<int:pk>', views.SocioUpdateView.as_view(), name='socio_modificar'),
     path('socios/eliminar/<int:pk>', views.SocioDeleteView.as_view(), name='socio_eliminar'),
 
-
+    #path('disciplinas/inscripción/<int:pk>', views.DisciplinaCreateView.as_view(), name='disciplina_inscripcion'),
+    path('socios/inscripción/<int:pk>', views.SocioInscripcionCreateView.as_view(), name='socio_inscripcion'),
 
     #path('inscripcion_socio/', views.inscripcion_socio, name='inscripcion_socio'),
     #path('estado_socios/', views.estado_socios, name='estado_socios'),

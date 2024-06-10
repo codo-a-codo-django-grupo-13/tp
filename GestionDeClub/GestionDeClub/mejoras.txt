@@ -19,6 +19,8 @@ Y que si se ingresaran no permita guardar (lado servidor)
 
 * Personalizarel cartelito de Eliminar
 
+* Paginado en listado de Socios
+
 
 :::::::::::::::
 :: RESUELTAS ::
