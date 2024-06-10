@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
 
-from .forms import DisciplinaForm, ProfeForm, SocioForm
-from .models import Disciplina, Profe, Socio
+from .forms import DisciplinaForm, ProfeForm, SocioForm, InscripcionForm
+from .models import Disciplina, Profe, Socio, Inscripcion
 
 
 def home(request):
@@ -188,3 +188,28 @@ class SocioDeleteView(DeleteView):
     model = Socio
     #template_name = 'club/socio_confirmacion_eliminar.html'
     success_url = reverse_lazy('socios_listado')
+
+class SocioInscripcionCreateView(CreateView):
+    model = Inscripcion
+    form_class = InscripcionForm
+    template_name = 'club/inscripcion_a_disciplina.html'
+    success_url = reverse_lazy('socios_listado')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['socio_id'] = self.kwargs.get('pk')
+        return kwargs
+    
+    def get_initial(self):
+        initial = super(SocioInscripcionCreateView, self).get_initial()
+        socio_id = self.kwargs.get('pk')
+        socio = get_object_or_404(Socio, id=socio_id)
+        initial['socio'] = socio
+        return initial
+    
+    def get_context_data(self, **kwargs):
+        context = super(SocioInscripcionCreateView, self).get_context_data(**kwargs)
+        socio_id = self.kwargs.get('pk')
+        socio = get_object_or_404(Socio, id=socio_id)
+        context['socio'] = socio
+        return context

@@ -8,8 +8,8 @@ class Disciplina(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     horarios = models.CharField(max_length=500)
     cuota = models.PositiveIntegerField(null=True, blank=True)
-    profe = models.ForeignKey('Profe', related_name='disciplinas', on_delete=models.SET_NULL, null=True, blank=True)
-    #socios =
+    profe = models.ForeignKey('Profe', related_name='disciplinas', on_delete=models.SET_NULL, null=True, blank=True) # classe Profe entre comillas porque aún no está definida (más abajo recién)
+    socios = models.ManyToManyField('Socio', related_name='disciplinas', through='Inscripcion') # classe Socio entre comillas porque aún no está definida (más abajo recién)
 
     class Meta:
         ordering = ['nombre']
@@ -17,6 +17,11 @@ class Disciplina(models.Model):
     def __str__(self):
         return self.nombre
     
+class Inscripcion(models.Model):
+    socio = models.ForeignKey('Socio', on_delete=models.CASCADE) # classe Socio entre comillas porque aún no está definida (más abajo recién)
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
+    fecha = models.DateField(auto_now_add=True)
+
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
@@ -57,6 +62,7 @@ class Profe(Persona):
 
 class Socio(Persona):
     numero = models.PositiveIntegerField(unique=True)
+    fecha_alta = models.DateField(verbose_name="Fecha de alta", auto_now_add=True)
 
     def clean(self):
         super().clean()

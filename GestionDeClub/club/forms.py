@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Disciplina, Profe, Socio
+from .models import Disciplina, Profe, Socio, Inscripcion
 
 
 class DisciplinaForm(forms.ModelForm):
@@ -65,3 +65,18 @@ class SocioForm(forms.ModelForm):
             raise forms.ValidationError('Este DNI ya existe para un Socio.')
         return dni
 '''
+
+class InscripcionForm(forms.ModelForm):
+    class Meta:
+        model = Inscripcion
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        socio_id = kwargs.pop('socio_id', None)
+        super(InscripcionForm, self).__init__(*args, **kwargs)
+        if socio_id:
+            socio_inscripciones = Inscripcion.objects.filter(socio_id=socio_id)
+            disciplinas_excluidas = Disciplina.objects.filter(inscripcion__in=socio_inscripciones)
+            self.fields['disciplina'].queryset = Disciplina.objects.exclude(id__in=disciplinas_excluidas)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
