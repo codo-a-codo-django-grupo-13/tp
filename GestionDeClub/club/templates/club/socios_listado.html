@@ -54,18 +54,20 @@
                             
                             <td>{{ socio.numero }}</td>
                             
-                            <td class="text-center">
+                            <td>
                                 {% if socio.disciplinas.all.count > 0 %}
-                                    <ul class="list-unstyled">
+                                    <ul class="list-unstyled mb-1">
                                         {% for disciplina in socio.disciplinas.all %}
                                             <li>
+                                                <a href="#" class="text-danger"><i class="bi bi-dash-circle small"></i></a>
                                                 {{ disciplina.nombre }}
-                                                <a href="#" class="text-danger"><i class="bi bi-x-circle"></i></a>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
-                                <a href="{% url 'socio_inscripcion' socio.id %}" class="text-success"><i class="bi bi-plus-circle"></i></a>
+                                <div>
+                                    <a href="{% url 'socio_inscripcion' socio.id %}" class="text-success small"><i class="bi bi-plus-circle"></i> INSCRIPCIÓN</a>
+                                </div>
                             </td>
 
                             <td class="text-center">

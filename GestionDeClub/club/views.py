@@ -197,6 +197,8 @@ class SocioDeleteView(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('socios_listado')
     success_message = 'Socio %(nombre)s %(apellido)s eliminado!'
 
+
+# VISTA PARAMETRIZADA, RECIBE EN EL PARÁMETRO <int:pk> EL ID DEL SOCIO QUE SE QUIERE INSCRIBIR
 class SocioInscripcionCreateView(CreateView):
     model = Inscripcion
     form_class = InscripcionForm
