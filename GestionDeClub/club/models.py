@@ -22,6 +22,10 @@ class Inscripcion(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     fecha = models.DateField(auto_now_add=True)
 
+    class Meta:
+        # En realidad un socio podría desinscribirse y volverse a inscribir en el futuro, pero es un caso que no analizaremos en esta versión
+        unique_together = ('socio', 'disciplina')
+
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
