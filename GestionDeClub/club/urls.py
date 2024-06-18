@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -23,4 +24,13 @@ urlpatterns = [
     #path('estado_socios/', views.estado_socios, name='estado_socios'),
     #path('editar_socio/<int:socio_id>/', views.editar_socio, name='editar_socio'),
     #path('eliminar_socio/<int:socio_id>/', views.eliminar_socio, name='eliminar_socio'),
+
+
+    #############
+    #   Auth    #
+    #############
+    # path ('accounts/', include('django.contrib.auth.urls')),
+    path ('accounts/login/', auth_views.LoginView.as_view(template_name='club/registration/login.html'), name='login'),
+    path ('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path ('accounts/password_reset/', auth_views.PasswordResetView.as_view(template_name='club/registration/password_reset.html'), name='password_reset'),
 ]
