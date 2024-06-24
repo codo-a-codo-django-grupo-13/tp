@@ -2,20 +2,20 @@
 TP grupal curso django
 
 
-:::::::::::::::__
+:::::::::::::::##
 :: PERMISOS  ::
 
-Sin usuario:__
-    Puede ver Inicio, Disciplinas, Profes__
+Sin usuario:##
+    Puede ver Inicio, Disciplinas, Profes##
     En profes, no ve (DNI, CUIT, email)
 
 
 
-USER: Administrativo__
-    Puede ver todos los listados__
-    Permisos abm Socios__
-    Permisos abm Disciplinas__
-    Permisos abm inscripcion Socios en Disciplinas__
+USER: Administrativo##
+    Puede ver todos los listados##
+    Permisos abm Socios##
+    Permisos abm Disciplinas##
+    Permisos abm inscripcion Socios en Disciplinas##
     No tiene permisos de abm para profes
 
 
@@ -32,8 +32,8 @@ USER: Administrativo__
         - "Can delete socio"  =>  delete_socio
         - "Can view socio"  =>  view_socio
 
-USER: rrhh__
-    Puede ver todos los listados__
+USER: rrhh##
+    Puede ver todos los listados##
     Tiene permisos de abm solo para profes
 
     Permisos a configurar en django admin
