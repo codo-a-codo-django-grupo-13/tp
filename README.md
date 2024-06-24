@@ -2,21 +2,21 @@
 TP grupal curso django
 
 
-:::::::::::::::##
 :: PERMISOS  ::
+<br/>
 
-Sin usuario:##
-    Puede ver Inicio, Disciplinas, Profes##
-    En profes, no ve (DNI, CUIT, email)
+Sin usuario:
+    - Puede ver Inicio, Disciplinas, Profes
+    - En profes, no ve (DNI, CUIT, email)
+<br/>
+<br/>
 
-
-
-USER: Administrativo##
-    Puede ver todos los listados##
-    Permisos abm Socios##
-    Permisos abm Disciplinas##
-    Permisos abm inscripcion Socios en Disciplinas##
-    No tiene permisos de abm para profes
+USER: Administrativo
+    - Puede ver todos los listados
+    - Permisos abm Socios
+    - Permisos abm Disciplinas
+    - Permisos abm inscripcion Socios en Disciplinas
+    - No tiene permisos de abm para profes
 
 
     Permisos a configurar en django admin
@@ -32,9 +32,11 @@ USER: Administrativo##
         - "Can delete socio"  =>  delete_socio
         - "Can view socio"  =>  view_socio
 
-USER: rrhh##
-    Puede ver todos los listados##
-    Tiene permisos de abm solo para profes
+<br/>
+<br/>
+USER: rrhh
+    - Puede ver todos los listados
+    - Tiene permisos de abm solo para profes
 
     Permisos a configurar en django admin
         - "Can add profe"  =>  add_profe
@@ -42,7 +44,9 @@ USER: rrhh##
         - "Can delete profe"  =>  delete_profe
         - "Can view socio"  =>  view_socio
 
-
+<br/>
+<br/>
+::::::::::::::::::::::::::::::
 TODOS LOS PERMISOS DE APP CLUB
     - "Can add disciplina"    =>  add_disciplina
     - "Can change disciplina" =>  change_disciplina
