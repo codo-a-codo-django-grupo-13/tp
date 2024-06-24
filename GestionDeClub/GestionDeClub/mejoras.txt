@@ -4,8 +4,7 @@
 ::::::::::::::::
 :: PENDIENTES ::
 
-* Colocar una X para cerrar los mensajes que aparecen en la parte superior:
-Ahora quedan ahí y es medio molesto, sería bueno que el usuario pueda cerrarlo una vez leído, o que desaparezca después de cierta cantidad de segundos
+
 
 * Diferenciar mensajes:
 Ahora se están mostrando todos celestes, un mensaje de éxito como puede ser "Disciplina creada correctamente" debería mostrarse distinto que un mensaje del estilo "Ya existe una disciplina con ese nombre"
@@ -27,3 +26,6 @@ Y que si se ingresaran no permita guardar (lado servidor)
 
 * Cambiar el cartel provisorio de la acción de Eliminar:
 Eliminar una Disciplina lanza un cartelito provisorio de confirmación con javascript pelado, sería bueno cambiarlo por un modal de bootstrap o algo más lindo
+
+* Colocar una X para cerrar los mensajes que aparecen en la parte superior:
+Ahora quedan ahí y es medio molesto, sería bueno que el usuario pueda cerrarlo una vez leído, o que desaparezca después de cierta cantidad de segundos

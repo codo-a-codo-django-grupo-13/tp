@@ -25,7 +25,9 @@
                 </nav>
 
                 <div>
-                    <a href="{% url 'profe_crear' %}" class="btn btn-primary btn-sm">Crear</a>
+                    {% if perms.club.add_profe %}
+                        <a href="{% url 'profe_crear' %}" class="btn btn-primary btn-sm">Crear</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -34,11 +36,15 @@
                     <tr class="table-dark">
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
-                        <th scope="col">DNI</th>
-                        <th scope="col">email</th>
-                        <th scope="col">CUIT</th>
+                        {% if user.is_authenticated %}
+                            <th scope="col">email</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">CUIT</th>
+                        {% endif %}
                         <th scope="col">Disciplinas</th>
-                        <th scope="col" class="text-center">Acciones</th>
+                        {% if perms.club.change_profe %}
+                            <th scope="col" class="text-center">Acciones</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -46,9 +52,11 @@
                         <tr>
                             <td><span class="text-#212529 fw-bold">{{ profe.nombre }}</span></td>
                             <td><span class="text-#212529 fw-bold">{{ profe.apellido }}</span></td>
-                            <td>{{ profe.dni }}</td>
-                            <td>{% if profe.email %}{{ profe.email }}{% else %}-{% endif %}</td>
-                            <td>{{ profe.cuit }}</td>
+                            {% if user.is_authenticated %}
+                                <td>{% if profe.email %}{{ profe.email }}{% else %}-{% endif %}</td>
+                                <td>{{ profe.dni }}</td>
+                                <td>{{ profe.cuit }}</td>
+                            {% endif %}
                             <td>
                                 {% if profe.disciplinas.all.count > 0 %}
                                     <ul>
@@ -60,10 +68,12 @@
                                     -
                                 {% endif %}
                             </td>
-                            <td class="text-center">
-                                <a href="{% url 'profe_modificar' profe.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
-                                <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'profe_eliminar' profe.id %}"><i class="bi bi-trash"></i></a>
-                            </td>
+                            {% if perms.club.change_profe %}
+                                <td class="text-center">
+                                    <a href="{% url 'profe_modificar' profe.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'profe_eliminar' profe.id %}"><i class="bi bi-trash"></i></a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -25,7 +25,9 @@
                 </nav>
 
                 <div>
-                    <a href="{% url 'socio_crear' %}" class="btn btn-success btn-sm">Crear</a>
+                    {% if perms.club.add_socio %}
+                        <a href="{% url 'socio_crear' %}" class="btn btn-success btn-sm">Crear</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -38,42 +40,50 @@
                         <th scope="col">email</th>
                         <th scope="col">Socio Nro.</th>
                         <th scope="col">Disciplinas</th>
-                        <th scope="col" class="text-center">Acciones</th>
+                        {% if perms.club.change_socio %}
+                            <th scope="col" class="text-center">Acciones</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
                     {% for socio in socios %}
                         <tr>
                             <td><span class="text-#212529 fw-bold">{{ socio.nombre }}</span></td>
-                            
+
                             <td><span class="text-#212529 fw-bold">{{ socio.apellido }}</span></td>
-                            
+
                             <td>{{ socio.dni }}</td>
-                            
+
                             <td>{{ socio.email }}</td>
-                            
+
                             <td>{{ socio.numero }}</td>
-                            
+
                             <td>
                                 {% if socio.disciplinas.all.count > 0 %}
                                     <ul class="list-unstyled mb-1">
                                         {% for disciplina in socio.disciplinas.all %}
                                             <li>
-                                                <a href="#" class="text-danger"><i class="bi bi-dash-circle small"></i></a>
+                                                {% if perms.club.add_inscripcion %}
+                                                    <a href="#" class="text-danger"><i class="bi bi-dash-circle small"></i></a>
+                                                {% endif %}
                                                 {{ disciplina.nombre }}
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
                                 <div>
-                                    <a href="{% url 'socio_inscripcion' socio.id %}" class="text-success small"><i class="bi bi-plus-circle"></i> INSCRIPCIÓN</a>
+                                    {% if perms.club.add_inscripcion %}
+                                        <a href="{% url 'socio_inscripcion' socio.id %}" class="text-success small"><i class="bi bi-plus-circle"></i> INSCRIPCIÓN</a>
+                                    {% endif %}
                                 </div>
                             </td>
 
-                            <td class="text-center">
-                                <a href="{% url 'socio_modificar' socio.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
-                                <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'socio_eliminar' socio.id %}"><i class="bi bi-trash"></i></a>
-                            </td>
+                            {% if perms.club.change_socio %}
+                                <td class="text-center">
+                                    <a href="{% url 'socio_modificar' socio.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="text-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'socio_eliminar' socio.id %}"><i class="bi bi-trash"></i></a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>

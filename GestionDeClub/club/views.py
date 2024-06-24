@@ -3,6 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .forms import DisciplinaForm, ProfeForm, SocioForm, InscripcionForm
 from .models import Disciplina, Profe, Socio, Inscripcion
@@ -59,11 +60,12 @@ def disciplina_crear(request):
     return render(request, 'club/disciplina_crear.html', context)
 '''
 
-class DisciplinaCreateView(CreateView):
+class DisciplinaCreateView(PermissionRequiredMixin, CreateView):
     model = Disciplina
     form_class = DisciplinaForm
     template_name = 'club/disciplina_crear.html'
     success_url = reverse_lazy('disciplinas_listado')
+    permission_required = 'club.add_disciplina'
 
 
     # Descomentar si hay lógica que agregar en el procesamiento del formulario
@@ -102,11 +104,12 @@ def disciplina_modificar(request, disciplina_id):
     return render(request, 'club/disciplina_modificar.html', context)
 '''
 
-class DisciplinaUpdateView(UpdateView):
+class DisciplinaUpdateView(PermissionRequiredMixin, UpdateView):
     model = Disciplina
     form_class = DisciplinaForm
     template_name = 'club/disciplina_modificar.html'
     success_url = reverse_lazy('disciplinas_listado')
+    permission_required = 'club.change_disciplina'
 
     #def form_valid(self, form):
     #    return super().form_valid(form)
@@ -126,10 +129,11 @@ def disciplina_eliminar(request, disciplina_id):
     return redirect('disciplinas_listado')
 '''
 
-class DisciplinaDeleteView(DeleteView):
+class DisciplinaDeleteView(PermissionRequiredMixin, DeleteView):
     model = Disciplina
     #template_name = 'club/disciplina_confirmacion_eliminar.html'
     success_url = reverse_lazy('disciplinas_listado')
+    permission_required = 'club.delete_disciplina'
 
     #def get_success_url(self):
     #    return reverse_lazy('disciplinas_listado')
@@ -149,61 +153,68 @@ class ProfeListView(ListView):
     context_object_name = 'profes'
 
 
-class ProfeCreateView(SuccessMessageMixin, CreateView):
+class ProfeCreateView(SuccessMessageMixin, PermissionRequiredMixin, CreateView):
     model = Profe
     form_class = ProfeForm
     template_name = 'club/profe_crear.html'
     success_url = reverse_lazy('profes_listado')
     success_message = 'Profe %(nombre)s %(apellido)s creado!'
+    permission_required = 'club.add_profe'
 
-class ProfeUpdateView(SuccessMessageMixin, UpdateView):
+class ProfeUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Profe
     form_class = ProfeForm
     template_name = 'club/profe_modificar.html'
     success_url = reverse_lazy('profes_listado')
     success_message = 'Profe %(nombre)s %(apellido)s actualizado!'
+    permission_required = 'club.change_profe'
 
-class ProfeDeleteView(SuccessMessageMixin, DeleteView):
+class ProfeDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Profe
     #template_name = 'club/profe_confirmacion_eliminar.html'
     success_url = reverse_lazy('profes_listado')
     success_message = 'Profe %(nombre)s %(apellido)s eliminado!'
+    permission_required = 'club.delete_profe'
 
 '''########'''
 ''' SOCIOS '''
 
-class SocioListView(ListView):
+class SocioListView(LoginRequiredMixin, ListView):
     model = Socio
     template_name = 'club/socios_listado.html'
     context_object_name = 'socios'
 
-class SocioCreateView(SuccessMessageMixin, CreateView):
+class SocioCreateView(SuccessMessageMixin, PermissionRequiredMixin, CreateView):
     model = Socio
     form_class = SocioForm
     template_name = 'club/socio_crear.html'
     success_url = reverse_lazy('socios_listado')
     success_message = 'Socio %(nombre)s %(apellido)s creado!'
+    permission_required = 'club.add_socio'
 
-class SocioUpdateView(SuccessMessageMixin, UpdateView):
+class SocioUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Socio
     form_class = SocioForm
     template_name = 'club/socio_modificar.html'
     success_url = reverse_lazy('socios_listado')
     success_message = 'Socio %(nombre)s %(apellido)s actualizado!'
+    permission_required = 'club.change_socio'
 
-class SocioDeleteView(SuccessMessageMixin, DeleteView):
+class SocioDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Socio
     #template_name = 'club/socio_confirmacion_eliminar.html'
     success_url = reverse_lazy('socios_listado')
     success_message = 'Socio %(nombre)s %(apellido)s eliminado!'
+    permission_required = 'club.delete_socio'
 
 
 # VISTA PARAMETRIZADA, RECIBE EN EL PARÁMETRO <int:pk> EL ID DEL SOCIO QUE SE QUIERE INSCRIBIR
-class SocioInscripcionCreateView(CreateView):
+class SocioInscripcionCreateView(PermissionRequiredMixin, CreateView):
     model = Inscripcion
     form_class = InscripcionForm
     template_name = 'club/inscripcion_a_disciplina.html'
     success_url = reverse_lazy('socios_listado')
+    permission_required = 'club.add_inscripcion'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

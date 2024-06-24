@@ -25,7 +25,9 @@
                 </nav>
 
                 <div>
-                    <a href="{% url 'disciplina_crear' %}" class="btn btn-success btn-sm">Crear</a>
+                    {% if perms.club.add_disciplina %}
+                        <a href="{% url 'disciplina_crear' %}" class="btn btn-success btn-sm">Crear</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -36,7 +38,9 @@
                         <th scope="col">Horarios</th>
                         <th scope="col">Profe</th>
                         <th scope="col" class="text-end">Cuota</th>
-                        <th scope="col" class="text-center">Acciones</th>
+                        {% if perms.club.change_disciplina %}
+                            <th scope="col" class="text-center">Acciones</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -46,11 +50,13 @@
                             <td class="small">{{ disciplina.horarios }}</td>
                             <td>{% if disciplina.profe %}{{ disciplina.profe }}{% else %}-{% endif %}</td>
                             <td class="text-end text-nowrap">{% if disciplina.cuota %}$ {{ disciplina.cuota|intcomma }}{% else %}<span class="small">Consultar</span>{% endif %}</td>
-                            <td class="text-center">
-                                <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-1"><i class="bi bi-pencil"></i></a>
-                                <a href="#" class="text-danger me-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'disciplina_eliminar' disciplina.id %}"><i class="bi bi-trash"></i></a>
-                                <a href="{#% url 'disciplina_socios_listar' disciplina.id %#}" class="text-black"><i class="bi bi-people"></i></a>
-                            </td>
+                            {% if perms.club.change_disciplina %}
+                                <td class="text-center">
+                                    <a href="{% url 'disciplina_modificar' disciplina.id %}" class="me-1"><i class="bi bi-pencil"></i></a>
+                                    <a href="#" class="text-danger me-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'disciplina_eliminar' disciplina.id %}"><i class="bi bi-trash"></i></a>
+                                    <a href="{#% url 'disciplina_socios_listar' disciplina.id %#}" class="text-black"><i class="bi bi-people"></i></a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </tbody>
