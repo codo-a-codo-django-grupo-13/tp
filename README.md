@@ -47,6 +47,7 @@ USER: rrhh
 <br/>
 <br/>
 ::::::::::::::::::::::::::::::
+<br/>
 TODOS LOS PERMISOS DE APP CLUB
     - "Can add disciplina"    =>  add_disciplina
     - "Can change disciplina" =>  change_disciplina
