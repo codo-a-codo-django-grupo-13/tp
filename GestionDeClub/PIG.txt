@@ -12,7 +12,7 @@ Exposiciones:
 **************************
 * ¿Qué hay que entregar? *
 
-El PIG deberá ser un sitio web con temática a elección, orientado a la gestión y que cumpla con los siguientes puntos 
+El PIG deberá ser un sitio web con temática a elección, orientado a la gestión y que cumpla con los siguientes puntos
 (revisar https://djangosites.com/ en caso de necesitar inspiración):
 
 1. El proyecto debe estar realizado en grupos de 5 o 6 personas según decisión del instructor, no pudiendo realizarse de manera individual.
@@ -41,7 +41,7 @@ El PIG deberá ser un sitio web con temática a elección, orientado a la gesti�
 
 9. En los modelos generados, debe haber al menos una relación de uno a muchos y una relación de muchos a muchos.
 
-10. El proyecto debe funcionar utilizando un servidor de base de datos local dentro de los soportados (en el curso se recomienda PostgreSQL), 
+10. El proyecto debe funcionar utilizando un servidor de base de datos local dentro de los soportados (en el curso se recomienda PostgreSQL),
 y debe poseer las migraciones necesarias para su funcionamiento (no se permite utilizar SQLLite).
 
 11. Debe poder accederse al admin de Django y al menos los modelos que poseen la relación muchos a muchos deben poder administrarse del mismo.
@@ -52,5 +52,5 @@ y debe poseer las migraciones necesarias para su funcionamiento (no se permite u
 * Condiciones de aprobación y metodología de entrega: *
 
 para aprobar el proyecto se requiere una exposición grupal del mismo en funcionamiento (se puede utilizar el ambiente de desarrollo)
-intentando no extender la misma más de 15 minutos. Según decisión del instructor, en la exposición final se puede brindar la posibilidad de exponer 
+intentando no extender la misma más de 15 minutos. Según decisión del instructor, en la exposición final se puede brindar la posibilidad de exponer
 mediante la preparación de un video, donde deberán exponer todas las personas que integren el equipo, en caso de no poder realizarlo en vivo.
