@@ -45,9 +45,6 @@ class DisciplinaDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('disciplinas_listado')
     permission_required = 'club.delete_disciplina'
 
-    #def get_success_url(self):
-    #    return reverse_lazy('disciplinas_listado')
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_name'] = self.get_object()
