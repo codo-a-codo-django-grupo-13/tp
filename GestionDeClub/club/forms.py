@@ -12,12 +12,12 @@ class DisciplinaForm(forms.ModelForm):
         widgets = {
             'horarios': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
         }
-    #profesores = forms.ChoiceField(label="Profesor", choices=PROFESORES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(DisciplinaForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
 
 class ProfeForm(forms.ModelForm):
     class Meta:
@@ -35,6 +35,7 @@ class ProfeForm(forms.ModelForm):
             raise forms.ValidationError('Este DNI ya existe para un Profe.')
         return dni
 
+
 class SocioForm(forms.ModelForm):
     class Meta:
         model = Socio
@@ -51,21 +52,6 @@ class SocioForm(forms.ModelForm):
             raise forms.ValidationError('Este DNI ya existe para un Socio.')
         return dni
 
-'''
-from django import forms
-from .models import Socio
-
-class SocioForm(forms.ModelForm):
-    class Meta:
-        model = Socio
-        fields = '__all__'
-
-    def clean_dni(self):
-        dni = self.cleaned_data['dni']
-        if Socio.objects.filter(dni=dni).exclude(id=self.instance.id).exists():
-            raise forms.ValidationError('Este DNI ya existe para un Socio.')
-        return dni
-'''
 
 class InscripcionForm(forms.ModelForm):
     class Meta:

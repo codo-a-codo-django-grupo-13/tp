@@ -8,36 +8,32 @@ class Disciplina(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     horarios = models.CharField(max_length=500)
     cuota = models.PositiveIntegerField(null=True, blank=True)
-    profe = models.ForeignKey('Profe', related_name='disciplinas', on_delete=models.SET_NULL, null=True, blank=True) # classe Profe entre comillas porque aún no está definida (más abajo recién)
-    socios = models.ManyToManyField('Socio', related_name='disciplinas', through='Inscripcion') # classe Socio entre comillas porque aún no está definida (más abajo recién)
+    profe = models.ForeignKey('Profe', related_name='disciplinas', on_delete=models.SET_NULL, null=True, blank=True)
+    socios = models.ManyToManyField('Socio', related_name='disciplinas', through='Inscripcion')
 
     class Meta:
         ordering = ['nombre']
 
     def __str__(self):
         return self.nombre
-    
+
 class Inscripcion(models.Model):
-    socio = models.ForeignKey('Socio', on_delete=models.CASCADE) # classe Socio entre comillas porque aún no está definida (más abajo recién)
+    socio = models.ForeignKey('Socio', on_delete=models.CASCADE)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     fecha = models.DateField(auto_now_add=True)
 
     class Meta:
-        # En realidad un socio podría desinscribirse y volverse a inscribir en el futuro, pero es un caso que no analizaremos en esta versión
         unique_together = ('socio', 'disciplina')
 
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     dni = models.PositiveIntegerField(verbose_name="DNI", unique=True)
-    # No hacemos único el email en esta Clase pues en el caso de Socio un/a menor puede ingresar el correo de su padre o madre, o inclusive ser Nulo
     email = models.EmailField(null=True, blank=True)
 
     class Meta:
-        # El echo de que la clase Persona sea o no abstracta, tiene implicancias en el caso de que un Profe pueda ser también Socio
-        # Por simplicidad optamos por hacer asbtracta la clase Persona y tomar Profe y Socio como dos Tipos completamente independientes
         abstract = True
-                    
+
 
 class Profe(Persona):
     cuit = models.CharField(max_length=100, verbose_name='CUIT', unique=True)

@@ -17,48 +17,11 @@ def home(request):
 '''#############'''
 ''' DISCIPLINAS '''
 
-'''
-# Descartamos las Vistas basadas en Funciones
-def disciplinas_listado(request):
-    disciplinas = Disciplina.objects.all()
-    print(disciplinas)
-    context = {'disciplinas': disciplinas}
-
-    return render(request, 'club/disciplinas_listado.html', context)
-'''
-
 class DisciplinaListView(ListView):
     model = Disciplina
     template_name = 'club/disciplinas_listado.html'
     context_object_name = 'disciplinas'
 
-    # Descomentar si en el futuro queremos filtrar los objetos, por ejemplo por Disciplinas Activas
-    #def get_queryset(self):
-    #    return Disciplina.objects.filter(...)
-
-
-'''
-# Descartamos las Vistas basadas en Funciones
-def disciplina_crear(request):
-    if request.method == "GET":
-        form = DisciplinaForm()
-
-    elif request.method == "POST":
-        form = DisciplinaForm(request.POST)
-
-        if form.is_valid():
-            disciplina = form.save()
-            messages.success(request, f'La Disciplina {disciplina} fue creada con éxito')
-            return redirect('disciplinas_listado')
-
-        else:
-            for complete_error in form.errors:
-                for error in form.errors[complete_error]:
-                    messages.error(request, error)
-
-    context = {'form': form}
-    return render(request, 'club/disciplina_crear.html', context)
-'''
 
 class DisciplinaCreateView(PermissionRequiredMixin, CreateView):
     model = Disciplina
@@ -68,42 +31,6 @@ class DisciplinaCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'club.add_disciplina'
 
 
-    # Descomentar si hay lógica que agregar en el procesamiento del formulario
-    #def form_valid(self, form):
-    #    return super().form_valid(form)
-
-    # Descomentar si hace falta especificar una redirección con parámetros
-    #def get_success_url(self):
-    #    return reverse_lazy('disciplinas_listado')
-
-
-'''
-# Descartamos las Vistas basadas en Funciones
-def disciplina_modificar(request, disciplina_id):
-    disciplina_activa = Disciplina.objects.get(id=disciplina_id)
-
-    if request.method == "GET":
-        form = DisciplinaForm(instance=disciplina_activa)
-
-    elif request.method == "POST":
-        form = DisciplinaForm(request.POST, instance=disciplina_activa)
-
-        if form.is_valid():
-            disciplina = form.save()
-            messages.success(request, f'La Disciplina {disciplina} fue modificada con éxito')
-            return redirect('disciplinas_listado')
-
-        else:
-            for complete_error in form.errors:
-                for error in form.errors[complete_error]:
-                    messages.error(request, error)
-
-    context = {
-        'form': form,
-        'disciplina_activa': disciplina_activa}
-    return render(request, 'club/disciplina_modificar.html', context)
-'''
-
 class DisciplinaUpdateView(PermissionRequiredMixin, UpdateView):
     model = Disciplina
     form_class = DisciplinaForm
@@ -111,23 +38,6 @@ class DisciplinaUpdateView(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('disciplinas_listado')
     permission_required = 'club.change_disciplina'
 
-    #def form_valid(self, form):
-    #    return super().form_valid(form)
-
-    #def get_success_url(self):
-    #    return reverse_lazy('disciplinas_listado')
-
-
-'''
-# Descartamos las Vistas basadas en Funciones
-def disciplina_eliminar(request, disciplina_id):
-    disciplina_activa = Disciplina.objects.get(id=disciplina_id)
-
-    disciplina_activa.delete()
-
-    messages.success(request, f'La Disciplina {disciplina_activa} fue eliminada con éxito')
-    return redirect('disciplinas_listado')
-'''
 
 class DisciplinaDeleteView(PermissionRequiredMixin, DeleteView):
     model = Disciplina
