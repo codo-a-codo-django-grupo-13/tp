@@ -79,7 +79,7 @@ class ProfeUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     success_message = 'Profe %(nombre)s %(apellido)s actualizado!'
     permission_required = 'club.change_profe'
 
-class ProfeDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
+class ProfeDeleteView(PermissionRequiredMixin, DeleteView):
     model = Profe
     #template_name = 'club/profe_confirmacion_eliminar.html'
     success_url = reverse_lazy('profes_listado')
@@ -110,7 +110,7 @@ class SocioUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     success_message = 'Socio %(nombre)s %(apellido)s actualizado!'
     permission_required = 'club.change_socio'
 
-class SocioDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
+class SocioDeleteView(PermissionRequiredMixin, DeleteView):
     model = Socio
     #template_name = 'club/socio_confirmacion_eliminar.html'
     success_url = reverse_lazy('socios_listado')
