@@ -1,3 +1,15 @@
+Grupo 13 | Gestion de club:
+::: Integrantes :::
+1. Danilo R. Frid
+2. Fernando Balderrama
+3. Pedro Gudiño
+4. María Acosta
+
+::: Repo de GitHub :::
+https://github.com/codo-a-codo-django-grupo-13/tp.git
+
+
+
 # tp
 TP grupal curso django
 

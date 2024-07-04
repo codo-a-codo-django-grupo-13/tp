@@ -57,7 +57,7 @@ class Profe(Persona):
                 raise ValidationError({'email': 'Ya existe un Profe con este email.'})
 
     def __str__(self):
-        return f"{self.apellido}, {self.nombre} ({self.cuit})"
+        return f"{self.apellido}, {self.nombre}"
 
 
 class Socio(Persona):
