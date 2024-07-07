@@ -61,12 +61,12 @@
                             <td>
                                 {% if socio.disciplinas.all.count > 0 %}
                                     <ul class="list-unstyled mb-1">
-                                        {% for disciplina in socio.disciplinas.all %}
+                                        {% for inscripcion in socio.inscripcion_set.all %}
                                             <li>
-                                                {% if perms.club.add_inscripcion %}
-                                                    <a href="#" class="text-danger"><i class="bi bi-dash-circle small"></i></a>
+                                                {% if perms.club.delete_inscripcion %}
+                                                    <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-url="{% url 'socio_inscripcion_eliminar' inscripcion.id %}"><i class="bi bi-dash-circle small"></i></a>
                                                 {% endif %}
-                                                {{ disciplina.nombre }}
+                                                {{ inscripcion.disciplina.nombre }}
                                             </li>
                                         {% endfor %}
                                     </ul>

@@ -23,26 +23,28 @@ class DisciplinaListView(ListView):
     context_object_name = 'disciplinas'
 
 
-class DisciplinaCreateView(PermissionRequiredMixin, CreateView):
+class DisciplinaCreateView(SuccessMessageMixin, PermissionRequiredMixin, CreateView):
     model = Disciplina
     form_class = DisciplinaForm
     template_name = 'club/disciplina_crear.html'
     success_url = reverse_lazy('disciplinas_listado')
+    success_message = 'Diciplina %(nombre)s creada!'
     permission_required = 'club.add_disciplina'
 
 
-class DisciplinaUpdateView(PermissionRequiredMixin, UpdateView):
+class DisciplinaUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Disciplina
     form_class = DisciplinaForm
     template_name = 'club/disciplina_modificar.html'
     success_url = reverse_lazy('disciplinas_listado')
+    success_message = 'Diciplina %(nombre)s actualizada!'
     permission_required = 'club.change_disciplina'
 
 
-class DisciplinaDeleteView(PermissionRequiredMixin, DeleteView):
+class DisciplinaDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Disciplina
-    #template_name = 'club/disciplina_confirmacion_eliminar.html'
     success_url = reverse_lazy('disciplinas_listado')
+    success_message = 'Diciplina eliminada!'
     permission_required = 'club.delete_disciplina'
 
     def get_context_data(self, **kwargs):
@@ -76,11 +78,10 @@ class ProfeUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     success_message = 'Profe %(nombre)s %(apellido)s actualizado!'
     permission_required = 'club.change_profe'
 
-class ProfeDeleteView(PermissionRequiredMixin, DeleteView):
+class ProfeDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Profe
-    #template_name = 'club/profe_confirmacion_eliminar.html'
     success_url = reverse_lazy('profes_listado')
-    success_message = 'Profe %(nombre)s %(apellido)s eliminado!'
+    success_message = 'Profe eliminado!'
     permission_required = 'club.delete_profe'
 
 '''########'''
@@ -107,11 +108,10 @@ class SocioUpdateView(SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     success_message = 'Socio %(nombre)s %(apellido)s actualizado!'
     permission_required = 'club.change_socio'
 
-class SocioDeleteView(PermissionRequiredMixin, DeleteView):
+class SocioDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Socio
-    #template_name = 'club/socio_confirmacion_eliminar.html'
     success_url = reverse_lazy('socios_listado')
-    success_message = 'Socio %(nombre)s %(apellido)s eliminado!'
+    success_message = 'Socio eliminado!'
     permission_required = 'club.delete_socio'
 
 
@@ -141,3 +141,10 @@ class SocioInscripcionCreateView(PermissionRequiredMixin, CreateView):
         socio = get_object_or_404(Socio, id=socio_id)
         context['socio'] = socio
         return context
+
+
+class SocioInscripcionDeleteView(SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
+    model = Inscripcion
+    success_url = reverse_lazy('socios_listado')
+    success_message = 'inscripción eliminada!'
+    permission_required = 'club.delete_inscripcion'
